@@ -88,8 +88,8 @@ router.post('/login', loggedOut, (req, res, next) => {
   .catch(err => next(err))
 })
 
-router.get('/main', loggedIn,(req,res,next)=>{
-res.render('main')
+router.get('/main', loggedOut, (req,res,next)=>{
+res.render('main',)
 })
 
 router.get('/private', loggedIn,(req,res,next)=>{
