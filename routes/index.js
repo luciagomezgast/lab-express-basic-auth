@@ -10,7 +10,6 @@ const loggedOut = require("../middleware/loggedOut");
 
 /* GET home page */
 router.get("/", (req, res, next) => {
-  console.log("entre al get /")
   res.render("index");
 });
 
@@ -60,7 +59,7 @@ router.get("/login", (req, res, next) => {
   res.render("login")
 })
 
-router.post('/login', loggedOut, (req, res, next) => {
+router.post('/login',/*  loggedOut,  */(req, res, next) => {
   /* console.log('estamos en el POST') */
 
   let {username, password} = req.body
@@ -80,7 +79,7 @@ router.post('/login', loggedOut, (req, res, next) => {
 
     if(bcrypt.compareSync(password, result[0].password)) {
       req.session.currentUser = username; 
-      res.redirect("/main");
+      res.redirect("/private");
     } else {
       res.render("login", { mensajeError: "Credenciales incorrectas" });
     }
@@ -88,11 +87,11 @@ router.post('/login', loggedOut, (req, res, next) => {
   .catch(err => next(err))
 })
 
-router.get('/main', loggedOut, (req,res,next)=>{
+router.get('/main', (req,res,next)=>{
 res.render('main',)
 })
 
-router.get('/private', loggedIn,(req,res,next)=>{
+router.get('/private', loggedIn ,(req,res,next)=>{
   res.render('private')
 })
 
